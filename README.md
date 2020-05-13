@@ -5,7 +5,8 @@ Preciso de um app para manter meu vício por filmes em dia. O app terá duas tel
  - Os filmes mais recentes
  - Os filmes mais populares
  - Os filmes melhores avaliados
- Ao clicar em um filme preciso ver todos os detalhes possíveis do filme clicado.
+
+Ao clicar em um filme preciso ver todos os detalhes possíveis do filme clicado.
 De tempos em tempos eu gosto de seguir um filme então gostaria de marcar um deles como favorito. (preciso também de um indicativo visual que esse filme é favorito ou não na tela inicial) 
 
 # Requisitos
