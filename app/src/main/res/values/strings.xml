@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Viciados em Filmes</string>
+    <string name="tab_text_1">Recentes</string>
+    <string name="tab_text_2">Populares</string>
+    <string name="tab_text_3">Top Rated</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imagem">Imagem</string>
+    <string name="capa_do_filme">Capa do filme</string>
+    <string name="icone_favoritado">Icone favoritado</string>
+</resources>
