@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetalheFilmeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
 
     <ProgressBar
         android:id="@+id/detalhe_filme_progress"
@@ -50,7 +54,7 @@
             android:id="@+id/icone_unfaved"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="280dp"
+            android:layout_marginStart="200dp"
             android:layout_marginTop="200dp"
             android:contentDescription="@string/icone_favoritado"
             android:src="@drawable/heart_unfaved"
@@ -63,7 +67,7 @@
             android:id="@+id/icone_faved"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="280dp"
+            android:layout_marginStart="200dp"
             android:layout_marginTop="200dp"
             android:contentDescription="@string/icone_favoritado"
             android:src="@drawable/heart_faved"
@@ -116,6 +120,7 @@
             app:layout_constraintTop_toBottomOf="@id/detalhe_filme_genero"
             tools:text="Sinopse" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
