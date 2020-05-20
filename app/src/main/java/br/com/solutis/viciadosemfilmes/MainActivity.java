@@ -3,6 +3,8 @@ package br.com.solutis.viciadosemfilmes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
     private List<Filme> filmesTopRated;
     private SectionsPagerAdapter sectionsPagerAdapter;
     SharedPreferences preferences;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = getSharedPreferences(Constantes.USER_PREFERENCES, MODE_PRIVATE);
+        progressBar = findViewById(R.id.main_progress);
 
         consultaRecentes();
     }
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), filmesRecentes, filmesPopulares, filmesTopRated);
 
         exibeFaved();
+        progressBar.setVisibility(View.INVISIBLE);
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
