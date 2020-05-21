@@ -13,4 +13,36 @@ public class PageResult<T> {
 
     @SerializedName("total_pages")
     private Integer totalPages;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public List<T> getResults() {
+        return results;
+    }
+
+    public void setResults(List<T> results) {
+        this.results = results;
+    }
+
+    public Integer getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
 }
