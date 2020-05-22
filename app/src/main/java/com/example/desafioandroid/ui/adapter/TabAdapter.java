@@ -1,4 +1,4 @@
-package com.example.desafioandroid.ui.main.adapter;
+package com.example.desafioandroid.ui.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

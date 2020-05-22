@@ -1,4 +1,4 @@
-package com.example.desafioandroid.ui.main.fragment;
+package com.example.desafioandroid.ui.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,6 +16,7 @@ import com.example.desafioandroid.R;
 import com.example.desafioandroid.model.Filme;
 import com.example.desafioandroid.model.PageResult;
 import com.example.desafioandroid.repository.FilmeRepository;
+import com.example.desafioandroid.ui.adapter.MyFilmeRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

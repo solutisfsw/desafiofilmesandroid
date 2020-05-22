@@ -5,6 +5,7 @@ import com.example.desafioandroid.model.PageResult;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface FilmeService {
 
@@ -18,4 +19,7 @@ public interface FilmeService {
 
     @GET("movie/upcoming?api_key="+ API_KEY+ "&language=pt-BR")
     Call<PageResult<Filme>> getUpcoming();
+
+    @GET("movie/{id}?api_key="+ API_KEY+ "&language=pt-BR")
+    Call<Filme> getMovieById(@Path("id") Integer id);
 }

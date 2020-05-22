@@ -45,6 +45,26 @@ public class Filme {
     @SerializedName("vote_average")
     private Double voteAverage;
 
+    private List<Genre> genres;
+
+    private String tagline;
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
+    }
+
     public Integer getId() {
         return id;
     }
