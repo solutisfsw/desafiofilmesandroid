@@ -2,6 +2,7 @@ package com.example.desafioandroid.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -10,6 +11,7 @@ import com.example.desafioandroid.R;
 import com.example.desafioandroid.model.Filme;
 import com.example.desafioandroid.ui.adapter.TabAdapter;
 import com.example.desafioandroid.ui.fragment.FilmeFragment;
+import com.example.desafioandroid.util.SharedPreferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -49,14 +51,26 @@ public class MainActivity extends AppCompatActivity implements FilmeFragment.OnL
     private void configFloatButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view -> {
+            final int idMovie = new SharedPreferences(MainActivity.this).getIdMovie();
+            if(idMovie > 0){
+                irParaDetalhe(idMovie);
+            }else {
+                Toast.makeText(this, "Você ainda não tem filme favorito!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onListFragmentInteraction(Filme item) {
+        irParaDetalhe(item.getId());
+    }
+
+    private void irParaDetalhe(int id) {
         Intent i = new Intent(MainActivity.this, DetalheFilmeActivity.class);
-        i.putExtra(ID_MOVIE_DETALHE, item.getId());
+        i.putExtra(ID_MOVIE_DETALHE, id);
         startActivity(i);
     }
+
+
 }

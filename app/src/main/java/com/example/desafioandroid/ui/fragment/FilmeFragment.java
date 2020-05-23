@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,13 +22,7 @@ import com.example.desafioandroid.ui.adapter.MyFilmeRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
-public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCarregadosCallback<PageResult<Filme>>{
+public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCarregadosCallback<PageResult<Filme>> {
 
     private static final String TYPE_MOVIE = "type_movie";
     public static final int TYPE_UPCOMING = 1;
@@ -35,10 +30,15 @@ public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCar
     public static final int TYPE_TOP_RATED = 3;
     private int type = 1;
     private OnListFragmentInteractionListener mListener;
-    private List<Filme> listMovie = new ArrayList<>();
     private Context context;
     private RecyclerView recyclerView;
     private ProgressDialog progressDoalog;
+    private PageResult<Filme> pageResult;
+    private int firstVisibleItem, totalItemCount;
+    private boolean loading = true;
+    private int previousTotal = 0;
+    private int visibleThreshold = 4;
+    private List<Filme> filmeList = new ArrayList<>();
 
 
     public FilmeFragment() {
@@ -63,23 +63,27 @@ public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCar
 
     private void getMovie() {
         FilmeRepository repository = new FilmeRepository();
-        progressDoalog = new ProgressDialog(context);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
-
+        progressShow();
         switch (type){
             case TYPE_UPCOMING:
-                repository.getUpcoming(FilmeFragment.this);
+                repository.getUpcoming(FilmeFragment.this, pageResult != null ? pageResult.getPage() + 1 : 1);
                 break;
             case TYPE_POPULAR:
-                repository.getPopular(FilmeFragment.this);
+                repository.getPopular(FilmeFragment.this, pageResult != null ? pageResult.getPage() + 1 : 1);
                 break;
             case TYPE_TOP_RATED:
-                repository.getTopRated(FilmeFragment.this);
+                repository.getTopRated(FilmeFragment.this, pageResult != null ? pageResult.getPage() + 1 : 1);
                 break;
             default:
                 return;
         }
+    }
+
+    private void progressShow() {
+        progressDoalog = new ProgressDialog(context);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setCancelable(false);
+        progressDoalog.show();
     }
 
     @Override
@@ -91,14 +95,41 @@ public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCar
             context = view.getContext();
             recyclerView = (RecyclerView) view;
             getMovie();
-
+            configRecyclerView(recyclerView);
         }
         return view;
     }
 
-    private void configRecyclerView(RecyclerView view, List<Filme> list) {
+    private void configRecyclerView(RecyclerView view) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new MyFilmeRecyclerViewAdapter(list, mListener,getContext()));
+        recyclerView.setAdapter(new MyFilmeRecyclerViewAdapter(filmeList, mListener,getContext()));
+        LinearLayoutManager layout = (LinearLayoutManager) recyclerView.getLayoutManager();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                totalItemCount = layout.getItemCount();
+                firstVisibleItem = layout.findFirstVisibleItemPosition();
+                //se tiver chamado a nova pagina pega o novo total
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false;
+                        previousTotal = totalItemCount;
+                    }
+                }
+                if( !loading && totalItemCount <= (firstVisibleItem + visibleThreshold)){
+                    getMovie();
+                    loading = true;
+                }
+            }
+        });
+
     }
 
 
@@ -122,7 +153,10 @@ public class FilmeFragment extends Fragment implements  FilmeRepository.DadosCar
     @Override
     public void quandoSucesso(PageResult<Filme> result) {
         Log.d("aqui", "quandoSucesso: "+ result);
-        configRecyclerView(recyclerView,result.getResults());
+        pageResult = result;
+        filmeList.addAll(pageResult.getResults());
+        recyclerView.getAdapter().notifyDataSetChanged();
+
         progressDoalog.dismiss();
     }
 

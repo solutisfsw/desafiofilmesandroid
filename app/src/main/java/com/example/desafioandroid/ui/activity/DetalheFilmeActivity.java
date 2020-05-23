@@ -1,5 +1,6 @@
 package com.example.desafioandroid.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import com.example.desafioandroid.R;
 import com.example.desafioandroid.model.Filme;
 import com.example.desafioandroid.model.Genre;
 import com.example.desafioandroid.repository.FilmeRepository;
+import com.example.desafioandroid.util.SharedPreferences;
 
 import java.util.stream.Collectors;
 
@@ -32,6 +34,11 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
     private TextView description;
     private ImageView imgPost;
     private ImageButton imageButton;
+    private Filme filme;
+    private int idMoviePreferences;
+    private SharedPreferences preferences;
+    private Resources res;
+    private ProgressDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +47,26 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         inicializarView();
-
+        res = getResources();
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             Integer idFilme = (Integer) extras.get(ID_MOVIE_DETALHE);
             if(idFilme != null){
+                preferences = new SharedPreferences(this);
+                idMoviePreferences = preferences.getIdMovie();
                 FilmeRepository repository = new FilmeRepository();
+                showProgress();
                 repository.getFilmeById(DetalheFilmeActivity.this, idFilme);
             }
         }
 
+    }
+
+    private void showProgress() {
+        progressDoalog = new ProgressDialog(this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setCancelable(false);
+        progressDoalog.show();
     }
 
     private void inicializarView() {
@@ -64,8 +81,17 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
     }
 
     private void setFavorite() {
-        Resources res = getResources(); getResources();
-        Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.ic_favorite_red_36dp, null);
+        if (filme != null && filme.getId() != idMoviePreferences){
+            preferences.salvarIdMovie(filme.getId());
+            setDrawableFavorite(R.drawable.ic_favorite_red_36dp);
+        }else{
+            preferences.salvarIdMovie(0);
+            setDrawableFavorite(R.drawable.ic_favorite_border_black_36dp);
+        }
+    }
+
+    private void setDrawableFavorite(int p) {
+        Drawable drawable = ResourcesCompat.getDrawable(res, p, null);
         imageButton.setImageDrawable(drawable);
     }
 
@@ -79,6 +105,9 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
                     .map(Genre::getName)
                     .collect(Collectors.joining(", ")));
         }
+        if(idMoviePreferences == result.getId()){
+            setDrawableFavorite(R.drawable.ic_favorite_red_36dp);
+        }
         carregarImg(result);
 
     }
@@ -87,17 +116,19 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
         Glide.with(DetalheFilmeActivity.this)
                 .load(BASE_URL_IMG +result.getPostPath())
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_image_black_24dp)
                 .into(imgPost);
     }
 
     @Override
     public void quandoSucesso(Filme resultado) {
+        filme = resultado;
         carreDadosNaTela(resultado);
+        progressDoalog.dismiss();
     }
 
     @Override
     public void quandoFalha(String erro) {
-
+        progressDoalog.dismiss();
     }
 }

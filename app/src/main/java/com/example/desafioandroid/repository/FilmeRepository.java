@@ -15,8 +15,8 @@ public class FilmeRepository {
         service = new FilmeRetrofit().getFilmeService();
     }
 
-    public void getPopular(final DadosCarregadosCallback<PageResult<Filme>> callback){
-        final Call<PageResult<Filme>> call = service.getPopular();
+    public void getPopular(final DadosCarregadosCallback<PageResult<Filme>> callback, int page){
+        final Call<PageResult<Filme>> call = service.getPopular(page);
         call.enqueue(new CallbackComRetorno<>(
             new CallbackComRetorno.RespostaCallback<PageResult<Filme>>() {
                 @Override
@@ -31,8 +31,8 @@ public class FilmeRepository {
             }));
     }
 
-    public void getTopRated(final DadosCarregadosCallback<PageResult<Filme>> callback){
-        final Call<PageResult<Filme>> call = service.getTopRated();
+    public void getTopRated(final DadosCarregadosCallback<PageResult<Filme>> callback, int page){
+        final Call<PageResult<Filme>> call = service.getTopRated(page);
         call.enqueue(new CallbackComRetorno<>(
                 new CallbackComRetorno.RespostaCallback<PageResult<Filme>>() {
                     @Override
@@ -47,8 +47,8 @@ public class FilmeRepository {
                 }));
     }
 
-    public void getUpcoming(final DadosCarregadosCallback<PageResult<Filme>> callback){
-        final Call<PageResult<Filme>> call = service.getUpcoming();
+    public void getUpcoming(final DadosCarregadosCallback<PageResult<Filme>> callback, int page){
+        final Call<PageResult<Filme>> call = service.getUpcoming(page);
         call.enqueue(new CallbackComRetorno<>(
                 new CallbackComRetorno.RespostaCallback<PageResult<Filme>>() {
                     @Override

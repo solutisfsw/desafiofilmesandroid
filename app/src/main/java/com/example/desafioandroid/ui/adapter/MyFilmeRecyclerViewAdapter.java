@@ -55,7 +55,7 @@ public class MyFilmeRecyclerViewAdapter extends RecyclerView.Adapter<MyFilmeRecy
         Glide.with(context)
                 .load(BASE_URL_IMG +mValues.get(position).getPostPath())
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_image_black_24dp)
                 .into(holder.imgPost);
     }
 
