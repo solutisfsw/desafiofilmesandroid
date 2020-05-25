@@ -18,6 +18,7 @@ import com.example.desafioandroid.R;
 import com.example.desafioandroid.model.Filme;
 import com.example.desafioandroid.model.Genre;
 import com.example.desafioandroid.repository.FilmeRepository;
+import com.example.desafioandroid.util.DateUtil;
 import com.example.desafioandroid.util.SharedPreferences;
 
 import java.util.stream.Collectors;
@@ -81,12 +82,13 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
     }
 
     private void setFavorite() {
-        if (filme != null && filme.getId() != idMoviePreferences){
-            preferences.salvarIdMovie(filme.getId());
-            setDrawableFavorite(R.drawable.ic_favorite_red_36dp);
-        }else{
+        idMoviePreferences = preferences.getIdMovie();
+        if (filme.getId() == idMoviePreferences) {
             preferences.salvarIdMovie(0);
             setDrawableFavorite(R.drawable.ic_favorite_border_black_36dp);
+        }else{
+            preferences.salvarIdMovie(filme.getId());
+            setDrawableFavorite(R.drawable.ic_favorite_red_36dp);
         }
     }
 
@@ -97,7 +99,7 @@ public class DetalheFilmeActivity extends AppCompatActivity implements FilmeRepo
 
     private void carreDadosNaTela(Filme result) {
         title.setText(result.getTitle());
-        ano.setText(result.getReleaseDate());
+        ano.setText(result.getReleaseDate() != null ? DateUtil.getTime(result.getReleaseDate(),"yyyy") : "");
         subTitle.setText(result.getTagline());
         description.setText(result.getOverview());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

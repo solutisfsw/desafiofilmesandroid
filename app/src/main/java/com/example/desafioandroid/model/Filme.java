@@ -4,6 +4,7 @@ import androidx.room.Entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Filme {
     private String overview;
 
     @SerializedName("release_date")
-    private String releaseDate;
+    private Date releaseDate;
 
     @SerializedName("genre_ids")
     private List<Integer> genreIds;
@@ -97,11 +98,11 @@ public class Filme {
         this.overview = overview;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
