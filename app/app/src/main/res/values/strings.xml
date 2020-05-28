@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DesafioFilmesAndroid</string>
+    <string name="app_title">Viciados em filmes</string>
+    <string name="tab_text_1">Recentes</string>
+    <string name="tab_text_2">Populares</string>
+    <string name="tab_text_3">Top Rated</string>
+    <string name="content_description_descricao_filme">Descrição do Filme</string>
+    <string name="nome_favorito">Favorito</string>
+</resources>

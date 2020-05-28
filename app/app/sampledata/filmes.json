@@ -1,0 +1,24 @@
+{
+  "filmes" : [
+    {
+      "poster_path" : "@drawable/bloodshot",
+      "title": "Bloodshot",
+      "overview": "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought."
+    },
+    {
+      "poster_path" : "@drawable/the_hunt",
+      "title": "The Hunt",
+      "overview": "Twelve strangers wake up in a clearing. They don't know where they are—or how they got there. In the shadow of a dark internet conspiracy theory, ruthless elitists gather at a remote location to hunt humans for sport. But their master plan is about to be derailed when one of the hunted turns the tables on her pursuers."
+    },
+    {
+      "poster_path" : "@drawable/emma",
+      "title": "Emma",
+      "overview": "In 1800s England, a well-meaning but selfish young woman meddles in the love lives of her friends."
+    },
+    {
+      "poster_path" : "@drawable/bloodshot",
+      "title": "The Wretched",
+      "overview": "A rebellious teenage boy embarks on a gutsy crusade to stop the terrifying evil he suspects has possessed his neighbor in this bone-chilling occult thriller."
+    }
+  ]
+}
