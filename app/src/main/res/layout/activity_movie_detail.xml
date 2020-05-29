@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MovieDetailActivity">
+
+    <ImageView
+        android:id="@+id/detail_movie_poster"
+        android:layout_width="220dp"
+        android:layout_height="266dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/detail_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_poster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="402dp"
+        tools:text="Título"
+        />
+
+    <TextView
+        android:id="@+id/detail_movie_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="402dp"
+        tools:text="2019"
+        />
+
+    <TextView
+        android:id="@+id/detail_movie_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginStart="10dp"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="402dp"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        />
+
+    <Button
+        android:id="@+id/detail_fav_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/detail_movie_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detail_movie_description"
+        app:layout_constraintTop_toBottomOf="@id/detail_movie_poster"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="338dp"
+        app:icon="@drawable/ic_favorite_border"
+        android:background="@drawable/ic_favorite_border"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

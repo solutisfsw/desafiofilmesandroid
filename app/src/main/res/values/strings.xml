@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">filmes</string>
+    <string name="tab_item_recent">Recentes</string>
+    <string name="tab_item_popular">Populares</string>
+    <string name="tab_item_top_rated">Top Rated</string>
+    <string name="error_list_movies">Falha ao Carregar os Filmes</string>
+    <string name="fail_load_fav_movie">Falha ao carregar filme favorito</string>
 </resources>
