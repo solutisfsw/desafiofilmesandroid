@@ -10,7 +10,7 @@ import retrofit2.Call;
 
 public class FilmeRepository {
 
-    private ApiService service;
+    public static ApiService service;
 
     public FilmeRepository() {
         service = new FilmesRetrofit().getApiService();

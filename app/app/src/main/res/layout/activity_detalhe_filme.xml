@@ -15,21 +15,22 @@
         android:contentDescription="@string/content_description_descricao_filme"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@sample/filmes.json/filmes/poster_path" />
 
     <TextView
         android:id="@+id/detalhe_filme_title"
-        android:layout_width="0dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:maxLines="2"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detalhe_filme_imagem_filme"
         app:layout_constraintVertical_bias="0.0" />
@@ -39,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detalhe_filme_title"
@@ -52,7 +52,6 @@
         android:textStyle="italic"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/detalhe_filme_release_date"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0"/>
@@ -63,7 +62,6 @@
         android:layout_margin="2dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/detalhe_filme_tagline"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -87,7 +85,7 @@
         android:id="@+id/detalhe_filme_botao_favorito"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginEnd="50dp"
         android:contentDescription="@string/nome_favorito"
         app:layout_constraintBottom_toBottomOf="@id/detalhe_filme_title"
         app:layout_constraintEnd_toEndOf="parent"

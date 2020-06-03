@@ -1,23 +1,20 @@
 package com.cleber.ramos.desafiofilmesandroid.model;
 
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class Filme
 {
-    private double popularity;
-    private int vote_count;
-    private boolean video;
-    private String poster_path;
+    @SerializedName("poster_path")
+    private String posterPath;
+
+    @SerializedName("id")
     private int id;
-    private boolean adult;
-    private String backdrop_path;
-    private String original_language;
-    private String original_title;
-    private List<Integer> genre_ids;
+
+    @SerializedName("title")
     private String title;
-    private double vote_average;
+
+    @SerializedName("overview")
     private String overview;
-    private String release_date;
 
     public String getTitle() {
         return title;
@@ -28,7 +25,7 @@ public class Filme
     }
 
     public String getPosterPath() {
-        return poster_path;
+        return posterPath;
     }
 
     public int getId() {

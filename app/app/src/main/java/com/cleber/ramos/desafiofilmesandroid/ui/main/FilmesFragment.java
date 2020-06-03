@@ -57,6 +57,11 @@ public class FilmesFragment extends Fragment {
         return fragment;
     }
 
+    public FilmesFragment()
+    {
+        mContext = null;
+    }
+
     private FilmesFragment(int index, Context mContext) {
         this.mContext = mContext;
         this.filmeRepository = new FilmeRepository();
@@ -98,15 +103,15 @@ public class FilmesFragment extends Fragment {
 
     private void configuraAdapter(RecyclerView listaFilmes) {
         if (this.index == INDEX_FILMES_MAIS_RECENTES) {
-            adapterMaisRecentes = new ListaFilmesAdapter(mContext, (posicao, filme) -> selecionaFilme(posicao, filme));
+            adapterMaisRecentes = new ListaFilmesAdapter((posicao, filme) -> selecionaFilme(filme));
             configuraScrollingNoAdapter(listaFilmes);
             carregaFilmesMaisRecentes();
         } else if (this.index == INDEX_FILMES_MAIS_POPULARES) {
-            adapterFilmesPopulares = new ListaFilmesAdapter(mContext, (posicao, filme) -> selecionaFilme(posicao, filme));
+            adapterFilmesPopulares = new ListaFilmesAdapter((posicao, filme) -> selecionaFilme(filme));
             configuraScrollingNoAdapter(listaFilmes);
             carregaFilmesMaisPopulares();
         } else if (this.index == INDEX_FILMES_MAIS_AVALIADOS) {
-            adapterFilmesMaisAvaliados = new ListaFilmesAdapter(mContext, (posicao, filme) -> selecionaFilme(posicao, filme));
+            adapterFilmesMaisAvaliados = new ListaFilmesAdapter((posicao, filme) -> selecionaFilme( filme));
             configuraScrollingNoAdapter(listaFilmes);
             carregaFilmesMaisAvaliados();
         }
@@ -305,7 +310,7 @@ public class FilmesFragment extends Fragment {
         dialog.dismiss();
     }
 
-    private void selecionaFilme(int posicao, Filme filme) {
+    private void selecionaFilme(Filme filme) {
         Intent detalheFilmeIntent = new Intent(getActivity(), DetalheFilmeActivity.class);
         detalheFilmeIntent.putExtra(CHAVE_ID_FILME, filme.getId());
         startActivity(detalheFilmeIntent);

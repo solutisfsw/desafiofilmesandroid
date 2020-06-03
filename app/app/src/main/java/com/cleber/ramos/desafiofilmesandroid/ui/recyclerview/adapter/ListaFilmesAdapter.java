@@ -20,26 +20,24 @@ import java.util.List;
 
 public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.FilmeViewHolder> {
 
-    private final Context context;
     private final List<Filme> filmes = new ArrayList<>();
     private final OnItemClickListener onItemClickListener;
 
-    public ListaFilmesAdapter(Context context, OnItemClickListener onItemClickListener) {
-        this.context = context;
+    public ListaFilmesAdapter(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public FilmeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View viewCriada = LayoutInflater.from(context).inflate(R.layout.item_filmes, parent, false);
+        View viewCriada = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filmes, parent, false);
         return new FilmeViewHolder(viewCriada);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FilmeViewHolder holder, int position) {
         Filme filme = filmes.get(position);
-        holder.vincula(filme);
+        holder.vincula(filme, holder.itemView.getContext());
     }
 
     @Override
@@ -48,10 +46,9 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
     }
 
     public void carregaListaFilmes(List<Filme> filmes) {
-        this.notifyItemRangeRemoved(0, this.filmes.size());
         this.filmes.clear();
         this.filmes.addAll(filmes);
-        this.notifyItemRangeInserted(0, this.filmes.size());
+        this.notifyDataSetChanged();
     }
 
     public void adicionaFilme(Filme filme) {
@@ -86,11 +83,11 @@ public class ListaFilmesAdapter extends RecyclerView.Adapter<ListaFilmesAdapter.
                     .onItemClick(getAdapterPosition(), filme));
         }
 
-        public void vincula(Filme filme) {
-            preencheCampo(filme);
+        public void vincula(Filme filme, Context context) {
+            preencheCampo(filme, context);
         }
 
-        private void preencheCampo(Filme filme) {
+        private void preencheCampo(Filme filme, Context context) {
             this.filme = filme;
             titulo.setText(filme.getTitle());
             descricao.setText(filme.getOverview());

@@ -1,4 +1,4 @@
-package com.cleber.ramos.desafiofilmesandroid;
+package com.cleber.ramos.desafiofilmesandroid.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.cleber.ramos.desafiofilmesandroid.ui.DetalheFilmeActivity;
+import com.cleber.ramos.desafiofilmesandroid.R;
 import com.cleber.ramos.desafiofilmesandroid.ui.main.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

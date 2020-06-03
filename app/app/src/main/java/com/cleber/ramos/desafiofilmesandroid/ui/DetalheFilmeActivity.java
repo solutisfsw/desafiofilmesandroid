@@ -171,7 +171,6 @@ public class DetalheFilmeActivity extends AppCompatActivity {
         dialog.dismiss();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void carregaInformacoesNaTela(FilmeDetalhe filme) {
         Glide.with(getBaseContext())
                 .load(FilmesRetrofit.URL_BASE_IMAGEM + filme.getPosterPath())
@@ -192,12 +191,13 @@ public class DetalheFilmeActivity extends AppCompatActivity {
 
         taglineFilme.setText(filme.getTagline());
 
-        List<String> genres = new ArrayList<>();
+        String generos = "";
         for (Genre g : filme.getGenres()) {
-            genres.add(g.name);
+            generos += g.name + ", ";
         }
+        generos = generos.substring(0, generos.lastIndexOf(", "));
 
-        generosFilme.setText(String.join(", ", genres));
+        generosFilme.setText(generos);
         descricaoFilme.setText(filme.getOverview());
     }
 
