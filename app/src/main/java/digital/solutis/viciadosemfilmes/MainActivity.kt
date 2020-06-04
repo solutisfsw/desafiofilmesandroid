@@ -16,7 +16,7 @@ import digital.solutis.viciadosemfilmes.ui.main.SectionsPagerAdapter
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var repository: FilmRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,63 +32,9 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
-
-        repository = FilmRepository()
-        findPopularMovies()
-        getFilmDetail(419704)
     }
 
-    private fun findPopularMovies() {
-        repository.findPopularMovies(object : FilmRepository.DadosCarregadosCallback<FilmResponse> {
-            override fun whenSuccessful(result: FilmResponse) {
-                Log.i("aaaa", result.toString())
-            }
 
-            override fun whenFails(error: String?) {
-                Toast.makeText(this@MainActivity , error, Toast.LENGTH_LONG).show()
-            }
-
-        })
-    }
-
-    private fun findTopRatedMovies() {
-        repository.findTopRatedMovies(object : FilmRepository.DadosCarregadosCallback<FilmResponse> {
-            override fun whenSuccessful(result: FilmResponse) {
-                TODO("Not yet implemented")
-            }
-
-            override fun whenFails(error: String?) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
-    private fun findUpcomingMovies() {
-        repository.findUpcomingMovies(object : FilmRepository.DadosCarregadosCallback<FilmResponse> {
-            override fun whenSuccessful(result: FilmResponse) {
-                TODO("Not yet implemented")
-            }
-
-            override fun whenFails(error: String?) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
-    private fun getFilmDetail(id: Int) {
-        repository.getFilmDetail(id, object : FilmRepository.DadosCarregadosCallback<Film> {
-            override fun whenSuccessful(result: Film) {
-                Log.i("aaaa", result.toString())
-            }
-
-            override fun whenFails(error: String?) {
-                Toast.makeText(this@MainActivity , error, Toast.LENGTH_LONG).show()
-            }
-
-        })
-    }
 
 
 

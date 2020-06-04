@@ -1,5 +1,6 @@
 package digital.solutis.viciadosemfilmes.repository
 
+import androidx.lifecycle.MutableLiveData
 import digital.solutis.viciadosemfilmes.model.Film
 import digital.solutis.viciadosemfilmes.model.FilmResponse
 import digital.solutis.viciadosemfilmes.retrofit.FilmRetrofit
@@ -11,47 +12,54 @@ class FilmRepository() {
 
     private val service = FilmRetrofit().filmService
 
-    fun findTopRatedMovies(callback: DadosCarregadosCallback<FilmResponse>) {
+    fun findTopRatedMovies(): MutableLiveData<FilmResponse> {
+        val filmData = MutableLiveData<FilmResponse>()
         val call = service.getTopRatedMovies()
         call.enqueue( BaseCallback ( object: BaseCallback.ResponseCallback<FilmResponse>{
 
             override fun whenSuccessful(result: FilmResponse) {
-                callback.whenSuccessful(result)
+                filmData.value = result
             }
 
             override fun whenFails(error: String?) {
-                callback.whenFails(error)
+                filmData.value = null
             }
         }))
+        return filmData
     }
 
-    fun findUpcomingMovies(callback: DadosCarregadosCallback<FilmResponse>) {
+    fun findUpcomingMovies() : MutableLiveData<FilmResponse> {
+        val filmData = MutableLiveData<FilmResponse>()
         val call = service.getUpcomingMovies()
+
         call.enqueue( BaseCallback ( object: BaseCallback.ResponseCallback<FilmResponse>{
 
             override fun whenSuccessful(result: FilmResponse) {
-                callback.whenSuccessful(result)
+                filmData.value = result
             }
 
             override fun whenFails(error: String?) {
-                callback.whenFails(error)
+                filmData.value = null
             }
         }))
+        return filmData
     }
 
 
-    fun findPopularMovies(callback: DadosCarregadosCallback<FilmResponse>) {
+    fun findPopularMovies(): MutableLiveData<FilmResponse> {
+        val filmData = MutableLiveData<FilmResponse>()
         val call = service.getPopularMovies()
         call.enqueue( BaseCallback ( object: BaseCallback.ResponseCallback<FilmResponse>{
 
             override fun whenSuccessful(result: FilmResponse) {
-                callback.whenSuccessful(result)
+                filmData.value = result
             }
 
             override fun whenFails(error: String?) {
-                callback.whenFails(error)
+                filmData.value = null
             }
         }))
+        return filmData
     }
 
     fun getFilmDetail(id: Int, callback: DadosCarregadosCallback<Film>) {

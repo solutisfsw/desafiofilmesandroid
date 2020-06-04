@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Viciados em Filmes</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Recentes</string>
+    <string name="tab_text_2">Populares</string>
+    <string name="tab_text_3">Top Rated</string>
+    <string name="poster_film_content_description">Poster do filme</string>
 </resources>

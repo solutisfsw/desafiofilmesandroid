@@ -8,9 +8,18 @@ data class Film (
     val overview: String,
     val tagline: String,
     val genres: List<Genre>,
-    @SerializedName("poster_path")val posterPath: String){
+    @SerializedName("poster_path")val posterPath: String,
+    @SerializedName("release_date")val releaseDate: String){
 
     companion object{
-   //     private const val "https://image.tmdb.org/t/p/w500/"
+        private const val baseUrl = "https://image.tmdb.org/t/p/w500/"
+    }
+
+    fun getFullPath (): String {
+        return baseUrl+posterPath
+    }
+
+    fun getYear (): String {
+        return releaseDate.substring(4)
     }
 }
