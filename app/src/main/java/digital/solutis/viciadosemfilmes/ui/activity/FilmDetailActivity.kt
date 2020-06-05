@@ -2,6 +2,7 @@ package digital.solutis.viciadosemfilmes.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -37,6 +38,7 @@ class FilmDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_film_detail)
+        activity_film_detail_group_detail.visibility = View.GONE
         title = "Viciado em filmes"
         val prefs = getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE)
         val favorite =  prefs.getInt(FILM_ID, 0)
@@ -65,7 +67,9 @@ class FilmDetailActivity : AppCompatActivity() {
                     Glide.with(this@FilmDetailActivity)
                         .load(it.getFullPath())
                         .into(activity_film_detail_poster)
+                    activity_film_detail_group_detail.visibility = View.VISIBLE
                 }
+                activity_film_detail_progressBar.visibility = View.INVISIBLE
             })
     }
 }

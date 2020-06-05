@@ -2,7 +2,9 @@ package digital.solutis.viciadosemfilmes
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,7 +37,11 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             val prefs = getSharedPreferences(FilmDetailActivity.MY_PREFS_NAME, Context.MODE_PRIVATE)
             val favorite =  prefs.getInt(FilmDetailActivity.FILM_ID, 0)
-            openFavorite(favorite)
+            if(favorite == 0){
+                Toast.makeText(this, "Nenhum filme ainda foi favoritado.", Toast.LENGTH_SHORT).show()
+            }else{
+                openFavorite(favorite)
+            }
         }
     }
 

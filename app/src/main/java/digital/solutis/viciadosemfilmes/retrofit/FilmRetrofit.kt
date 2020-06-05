@@ -11,6 +11,7 @@ import java.io.IOException
 class FilmRetrofit {
     companion object{
         const val API_KEY = "b8a50c65d87318122acbafe4d8c24b4b"
+        const val LANGUAGE = "pt-BR"
         const val HOST = "https://api.themoviedb.org"
     }
     var filmService : FilmService
@@ -25,7 +26,7 @@ class FilmRetrofit {
             override fun intercept(chain: Interceptor.Chain): Response {
                 var request: Request = chain.request()
                 val url: HttpUrl =
-                    request.url.newBuilder().addQueryParameter("api_key", API_KEY).build()
+                    request.url.newBuilder().addQueryParameter("api_key", API_KEY).addQueryParameter("language", LANGUAGE).build()
                 request = request.newBuilder().url(url).build()
                 return chain.proceed(request)
             }

@@ -51,12 +51,12 @@ class PlaceholderFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list_film_recycleview.adapter = adapter
+        list_film_recycleview.visibility = View.GONE
         adapter.onClickItem = this::openFilmDetail
         findFilms()
     }
@@ -73,7 +73,9 @@ class PlaceholderFragment : Fragment() {
                 Toast.makeText(activity, "Ocorreu um erro ao buscar os filmes.", Toast.LENGTH_SHORT).show()
             }else{
                adapter.update(it.results)
+                list_film_recycleview.visibility = View.VISIBLE
             }
+            fragment_main_progressBar.visibility = View.GONE
         })
     }
 
