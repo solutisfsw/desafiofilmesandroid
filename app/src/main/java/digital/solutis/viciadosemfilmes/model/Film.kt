@@ -15,11 +15,10 @@ data class Film (
         private const val baseUrl = "https://image.tmdb.org/t/p/w500/"
     }
 
-    fun getFullPath (): String {
-        return baseUrl+posterPath
-    }
+    fun getFullPath () =  baseUrl+posterPath
 
-    fun getYear (): String {
-        return releaseDate.substring(4)
-    }
+    fun getYear () =  releaseDate.substring(0,4)
+
+    fun getGenresString() = genres.joinToString( separator = ", ") { it -> it.name }
+
 }

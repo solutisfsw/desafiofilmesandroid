@@ -22,8 +22,8 @@ class FilmListAdapter ( private val context: Context?,
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
-        val viewCriada = LayoutInflater.from(context).inflate(R.layout.item_film, parent, false)
-        return FilmViewHolder(viewCriada)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_film, parent, false)
+        return FilmViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +33,6 @@ class FilmListAdapter ( private val context: Context?,
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         val film = films[position]
         holder.bind(film, context)
-
     }
 
     fun update(films: List<Film>) {
@@ -54,14 +53,13 @@ class FilmListAdapter ( private val context: Context?,
         init {
             itemView.setOnClickListener {
                 if (::film.isInitialized) {
-
-                    Log.i("aaaa",film.toString())
                     onClickItem(film)
                 }
             }
         }
 
         fun bind(film : Film, context: Context?){
+            this.film = film
             title.text = film.title
             overview.text = film.overview
             Glide.with(context!!)

@@ -34,6 +34,7 @@ class FilmDetailActivity : AppCompatActivity() {
                 activity_film_detail_tagline.text = result.tagline
                 activity_film_detail_overview.text = result.overview
                 activity_film_detail_year.text = result.getYear()
+                activity_film_detail_genres.text = result.getGenresString()
                 Glide.with(this@FilmDetailActivity)
                     .load(result.getFullPath())
                     .into(activity_film_detail_poster)
