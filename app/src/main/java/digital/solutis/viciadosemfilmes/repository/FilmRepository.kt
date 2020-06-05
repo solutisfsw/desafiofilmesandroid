@@ -62,18 +62,20 @@ class FilmRepository() {
         return filmData
     }
 
-    fun getFilmDetail(id: Int, callback: DadosCarregadosCallback<Film>) {
+    fun getFilmDetail(id: Int): MutableLiveData<Film> {
+        val filmData = MutableLiveData<Film>()
         val call: Call<Film> = service.getMovieDetail(id)
         call.enqueue( BaseCallback ( object: BaseCallback.ResponseCallback<Film>{
 
             override fun whenSuccessful(result: Film) {
-                callback.whenSuccessful(result)
+                filmData.value = result
             }
 
             override fun whenFails(error: String?) {
-                callback.whenFails(error)
+                filmData.value = null
             }
         }))
+        return filmData
     }
 
     interface DadosCarregadosCallback<T> {

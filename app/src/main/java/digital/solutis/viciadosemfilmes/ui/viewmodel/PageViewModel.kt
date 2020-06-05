@@ -1,4 +1,4 @@
-package digital.solutis.viciadosemfilmes.ui.main
+package digital.solutis.viciadosemfilmes.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,15 +11,10 @@ import digital.solutis.viciadosemfilmes.repository.FilmRepository
 class PageViewModel(private val repository: FilmRepository) : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
-    val text: LiveData<String> = Transformations.map(_index) {
-        "Hello world from section: $it"
-    }
 
     fun setIndex(index: Int) {
         _index.value = index
     }
-
-
 
     fun getFilmRepository(): LiveData<FilmResponse?>? {
         return when (_index.value) {
@@ -27,5 +22,9 @@ class PageViewModel(private val repository: FilmRepository) : ViewModel() {
             2 -> repository.findPopularMovies()
             else -> repository.findTopRatedMovies()
         }
+    }
+
+    fun getFilmDeatil(id: Int): LiveData<Film?>? {
+        return repository.getFilmDetail(id)
     }
 }
